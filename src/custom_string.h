@@ -1,5 +1,4 @@
-#ifndef UBUNTU_PLAYGROUND_CUSTOM_STRING_H
-#define UBUNTU_PLAYGROUND_CUSTOM_STRING_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -32,4 +31,3 @@ public:
 
 ostream& operator<<(ostream& os, const CustomString& str);
 
-#endif //UBUNTU_PLAYGROUND_CUSTOM_STRING_H

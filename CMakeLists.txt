@@ -16,7 +16,9 @@ include_directories(.)
 
 add_executable(playground main.cpp
         src/custom_string.h
-        src/custom_string.cpp)
+        src/custom_string.cpp
+        src/csv_file_dumper.h
+        src/csv_file_dumper.cpp)
 
 add_executable(test_custom_string test/test_custom_string.cpp
         src/custom_string.h

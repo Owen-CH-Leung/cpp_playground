@@ -4,7 +4,7 @@
 TEST(CustomString, DefaultConstructor) {
     CustomString custom_str;
     ASSERT_EQ(custom_str.size(), 0);
-    ASSERT_STREQ(custom_str.c_str(), "");
+    ASSERT_STREQ(custom_str.c_str(), nullptr);
     ASSERT_TRUE(custom_str.IsEmpty());
 }
 
@@ -47,7 +47,7 @@ TEST(CustomString, CustomStringMoveConstructor) {
     ASSERT_EQ(custom_str2.size(), 14);
     ASSERT_STREQ(custom_str2.c_str(), "MyCustomString");
     ASSERT_EQ(custom_str1.size(), 0);
-    ASSERT_STREQ(custom_str1.c_str(), "");
+    ASSERT_STREQ(custom_str1.c_str(), nullptr);
     ASSERT_TRUE(custom_str1.IsEmpty());
 
 }
@@ -70,7 +70,7 @@ TEST(CustomString, CustomStringMoveAssignmentConstructor) {
     ASSERT_EQ(custom_str2.size(), 3);
     ASSERT_STREQ(custom_str2.c_str(), "XYZ");
     ASSERT_EQ(custom_str1.size(), 0);
-    ASSERT_STREQ(custom_str1.c_str(), "");
+    ASSERT_STREQ(custom_str1.c_str(), nullptr);
     ASSERT_TRUE(custom_str1.IsEmpty());
 }
 

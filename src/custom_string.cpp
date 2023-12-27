@@ -3,12 +3,13 @@
 #include <cstring>
 
 CustomString::CustomString() {
-    data = new char[1];
-    data[0] = '\0';
+    cout << "Invoking default constructor" << endl;
+    data = nullptr;
     size_ = 0;
 }
 
 CustomString::CustomString(const string& str) {
+    cout << "Invoking string& constructor" << endl;
     data = new char[str.size() + 1];
     copy(str.begin(), str.end(), data);
     size_ = str.size();
@@ -16,6 +17,7 @@ CustomString::CustomString(const string& str) {
 }
 
 CustomString::CustomString(const char* cstr) {
+    cout << "Invoking const char* constructor" << endl;
     size_ = strlen(cstr);
     data = new char[size_ + 1];
     strcpy(data, cstr);
@@ -23,6 +25,7 @@ CustomString::CustomString(const char* cstr) {
 }
 
 CustomString::CustomString(string&& other) noexcept {
+    cout << "Invoking string&& constructor" << endl;
     size_ = other.size();
     data = new char[size_ + 1];
     copy(other.begin(), other.end(), data);
@@ -35,6 +38,7 @@ CustomString::~CustomString() {
 }
 
 CustomString::CustomString(const CustomString& other) {
+    cout << "Invoking CustomString& constructor" << endl;
     data = new char[other.size() + 1];
     size_ = other.size();
     std::copy(other.data, other.data + other.size(), data);
@@ -43,14 +47,17 @@ CustomString::CustomString(const CustomString& other) {
 
 CustomString::CustomString(CustomString &&other) noexcept:
     data(other.data), size_(other.size_) {
-    other.data = new char[1];
-    other.data[0] = '\0';
+    cout << "Invoking CustomString&& constructor" << endl;
+    other.data = nullptr;
     other.size_ = 0;
 }
 
 CustomString& CustomString::operator=(const CustomString& other) {
+    cout << "Invoking CustomString& operator= constructor" << endl;
     if (this != &other) {
-        delete[] data;
+        if (data != nullptr) {
+            delete[] data;
+        }
         size_ = other.size();
         data = new char[size_ + 1];
         std::copy(other.data, other.data + other.size(), data);
@@ -61,21 +68,28 @@ CustomString& CustomString::operator=(const CustomString& other) {
 }
 
 CustomString& CustomString::operator=(CustomString&& other) noexcept{
+    cout << "Invoking CustomString&& operator= constructor" << endl;
     if (this != &other) {
-        delete[] data;
+        if (data != nullptr) {
+            delete[] data;
+        }
         data = other.data;
         size_ = other.size_;
-        other.data = new char[1];
-        other.data[0] = '\0';
+        other.data = nullptr;
         other.size_ = 0;
-
     }
     return *this;
 }
 
 CustomString& CustomString::operator=(std::string str) noexcept {
-    data = str.data();
+    cout << "Invoking string operator= constructor" << endl;
+    if (data != nullptr) {
+        delete[] data;
+    }
     size_ = str.size();
+    data = new char[size_ + 1];
+    copy(str.begin(), str.end(), data);
+    data[size_] = '\0';
     return *this;
 }
 
@@ -92,6 +106,7 @@ const char* CustomString::c_str() const {
 }
 
 ostream& operator<<(ostream& os, const CustomString& str) {
+
     os << "CustomString: " << str.c_str() << ", Size: " << str.size();
     return os;
 }
